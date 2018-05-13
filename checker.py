@@ -2,14 +2,14 @@
 
 import os
 import ast
-import ConfigParser
+import configparser
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 
-config = ConfigParser.ConfigParser()
+config = configparser.ConfigParser()
 
 config.read('checker.ini')
 
@@ -77,7 +77,7 @@ def checkerrors():
 			pass
 		if error != None:
 			if num_retries < RETRIES:
-				print('Site error: ' + error.text)
+				print(('Site error: ' + error.text))
 				num_retries += 1
 				driver.refresh()
 			else:
@@ -101,7 +101,7 @@ for i in range(NUM_RESERVATIONS):
 	EQUIPMENT_TYPE = config.get("reservation_" + count, "equipment_type")
 	SITES = ast.literal_eval(config.get("reservation_" + count, "sites"))
 
-	print SITES
+	print(SITES)
 
 	url_request = 'http://www.recreation.gov/campsiteDetails.do?siteId={site_id}&contractCode=NRSO&parkId={park_id}&arvdate=' + ARV_DATE + '&lengthOfStay=' + LENGTH_OF_STAY
 
@@ -150,7 +150,7 @@ for i in range(NUM_RESERVATIONS):
 			# Click "Continue to Shopping Cart" button
 			driver.find_element_by_id('continueshop').click()
 
-			print "You have 15 minutes to complete this reservation in the browser window."
+			print("You have 15 minutes to complete this reservation in the browser window.")
 			
 		else:
 			print('No available sites. (L2)')
